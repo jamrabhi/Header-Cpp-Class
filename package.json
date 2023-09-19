@@ -2,17 +2,17 @@
 	"name": "canonicalclasscpp",
 	"displayName": "42 Canonical Class CPP",
 	"description": "This extension is to automatically create a canonical hpp and cpp file",
-	"version": "0.3.4",
-	"publisher": "frfreyCanonicalClassCPP",
+	"version": "0.3.5",
+	"publisher": "jamrabhi from frfreyCanonicalClassCPP",
 	"icon": "42.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Etheram68/Header-Cpp-Class"
+		"url": "https://github.com/jamrabhi/Header-Cpp-Class"
 	},
 	"bugs": {
 		"url": "https://github.com/Etheram68/Header-Cpp-Class/issues"
 	},
-	"homepage": "https://github.com/Etheram68/Header-Cpp-Class",
+	"homepage": "https://github.com/jamrabhi/Header-Cpp-Class",
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.47.0"
