@@ -36,13 +36,13 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"/* ************************************************************************** */\n"+
 						"/* 									OPERATORS								  */\n" +
 						"/* ************************************************************************** */\n\n" +
-						name + " &	" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
+						name + " &" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
 						"	//{\n	//}\n" +
 						"	return (*this);\n}\n\n" +
+						"\n" +
 						"/* ************************************************************************** */\n"+
 						"/* 								MEMBER FUNCTIONS							  */\n" +
 						"/* ************************************************************************** */\n\n"
-						+ "\n"
 
 		let classhpp =	"#ifndef " + name.toUpperCase() + "_HPP\n" +
 						"# define " + name.toUpperCase() + "_HPP\n\n" +
@@ -56,7 +56,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"\n" +
 						"		" + name + " &operator=(" + name + " const &rhs);"+
 						"\n\n" +
-						"	private:\n\n" +
+						"	private:\n\t\n" +
 						"};\n\n" +
 						"#endif\n"
 
@@ -91,7 +91,7 @@ export const getTemplateTpp = ( name: string | undefined, filePathTpp: vscode.Ur
 						"\n" +
 						"\n	/*\n	** ------------------------------- CONSTRUCTOR --------------------------------\n	*/\n\n" +
 						"		" + name + "() {};\n" +
-						"		" + name + "( " + name + " const &src ) {};\n\n" +
+						"		" + name + "( " + name + " const & src ) {};\n\n" +
 						"\n	/*\n	** -------------------------------- DESTRUCTOR --------------------------------\n	*/\n\n" +
 						"		~" + name + "() {};\n\n" +
 						"\n	/*\n	** --------------------------------- OVERLOAD ---------------------------------\n	*/\n\n" +
@@ -100,7 +100,7 @@ export const getTemplateTpp = ( name: string | undefined, filePathTpp: vscode.Ur
 						"			return *this;\n		}\n\n" +
 						"\n	/*\n	** --------------------------------- METHODS ----------------------------------\n	*/\n\n" +
 						"\n" +
-						"	private:\n\t\n" +
+						"	private:\n\n" +
 						"};\n\n" +
 						"#endif /* *" + star + " " + name.toUpperCase() + "_TPP */";
 
