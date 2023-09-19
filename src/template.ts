@@ -26,20 +26,25 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 		}
 
 		let classcpp =  "#include \"" + name + ".hpp\"\n" +
-						"\n/*\n** ------------------------------- CONSTRUCTOR --------------------------------\n*/\n\n" +
+						"\n" +
+						"/* ************************************************************************** */\n"+
+						"/* 							CONSTRUCTORS / DESTRUCTORS						  */\n"+
+						"/* ************************************************************************** */\n" +
 						name + "::" + name + "()\n{\n}\n\n" +
-						name + "::" + name + "( const " + name + " & src )\n{\n}\n\n" +
-						"\n/*\n** -------------------------------- DESTRUCTOR --------------------------------\n*/\n\n" +
+						name + "::" + name + "(" + name + " const &src)\n{\n}\n\n" +
 						name + "::~" + name + "()\n{\n}\n\n" +
-						"\n/*\n** --------------------------------- OVERLOAD ---------------------------------\n*/\n\n" +
-						name + " &				" + name + "::operator=( " + name + " const & rhs )\n{\n	//if ( this != &rhs )\n" +
-						"	//{\n		//this->_value = rhs.getValue();\n	//}\n" +
-						"	return *this;\n}\n\n" +
-						"std::ostream &			operator<<( std::ostream & o, " + name + " const & i )\n" +
-						"{\n	//o << \"Value = \" << i.getValue();\n	return o;\n}\n\n" +
-						"\n/*\n** --------------------------------- METHODS ----------------------------------\n*/\n\n" +
-						"\n/*\n** --------------------------------- ACCESSOR ---------------------------------\n*/\n\n" +
-						"\n/* ************************************************************************** */";
+						"\n" +
+						"/* ************************************************************************** */\n"+
+						"/* 									OPERATORS								  */\n"
+						"/* ************************************************************************** */\n" +
+						name + " &	" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
+						"	//{\n}\n" +
+						"	return (*this);\n}\n\n" +
+						"\n" +
+						"/* ************************************************************************** */\n"+
+						"/* 								MEMBER FUNCTIONS							  */\n" +
+						"/* ************************************************************************** */\n" +
+						"\n\n"
 
 		let classhpp =	"#ifndef " + name.toUpperCase() + "_HPP\n" +
 						"# define " + name.toUpperCase() + "_HPP\n\n" +
@@ -54,7 +59,8 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"		" + name + " &operator=(" + name + " const &rhs);"+
 						"\n\n" +
 						"	private:\n\n" +
-						"};\n\n"
+						"};\n\n" +
+						"#endif\n"
 
 
 		fs.writeFile(filePathCpp.fsPath, classcpp, function (err: any) { if (err) return console.log(err); });
