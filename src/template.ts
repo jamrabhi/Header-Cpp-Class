@@ -39,10 +39,10 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						name + " &" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
 						"	//{\n	//}\n" +
 						"	return (*this);\n}\n\n" +
-						"\n" +
 						"/* ************************************************************************** */\n"+
 						"/* 								MEMBER FUNCTIONS							  */\n" +
 						"/* ************************************************************************** */\n\n"
+						+ "\n"
 
 		let classhpp =	"#ifndef " + name.toUpperCase() + "_HPP\n" +
 						"# define " + name.toUpperCase() + "_HPP\n\n" +
