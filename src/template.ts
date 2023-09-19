@@ -46,20 +46,15 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"# include <iostream>\n" +
 						"# include <string>\n\n" +
 						"class " + name + "\n{\n" +
-						"\n" +
 						"	public:\n" +
-						"\n" +
 						"		" + name + "();\n" +
-						"		" + name + "( " + name + " const & src );\n" +
+						"		" + name + "(" + name + " const & src);\n" +
 						"		~" + name + "();\n" +
 						"\n" +
-						"		" + name + " &		operator=( " + name + " const & rhs );"+
+						"		" + name + " &operator=(" + name + " const &rhs);"+
 						"\n\n" +
 						"	private:\n\n" +
-						"};\n\n" +
-						"std::ostream &			operator<<( std::ostream & o, " + name + " const & i );"+
-						"\n\n" +
-						"#endif /* *" + star + " " + name.toUpperCase() + "_H */";
+						"};\n\n"
 
 
 		fs.writeFile(filePathCpp.fsPath, classcpp, function (err: any) { if (err) return console.log(err); });
