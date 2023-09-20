@@ -51,7 +51,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"class " + name + "\n{\n" +
 						"	public:\n" +
 						"		" + name + "();\n" +
-						"		" + name + "(" + name + " const & src);\n" +
+						"		" + name + "(" + name + " const &src);\n" +
 						"		~" + name + "();\n" +
 						"\n" +
 						"		" + name + "	&operator=(" + name + " const &rhs);"+
