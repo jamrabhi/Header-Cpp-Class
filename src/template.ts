@@ -31,7 +31,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"/* 							CONSTRUCTORS / DESTRUCTORS						  */\n"+
 						"/* ************************************************************************** */\n\n" +
 						name + "::" + name + "()\n{\n}\n\n" +
-						name + "::" + name + "(" + name + " const &src)\n{\n}\n\n" +
+						name + "::" + name + "(" + name + " const &src)\n{\n	*this = src\n}\n\n" +
 						name + "::~" + name + "()\n{\n}\n\n" +
 						"/* ************************************************************************** */\n"+
 						"/* 									OPERATORS								  */\n" +
