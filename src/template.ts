@@ -36,7 +36,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"/* ************************************************************************** */\n"+
 						"/* 									OPERATORS								  */\n" +
 						"/* ************************************************************************** */\n\n" +
-						name + " &" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
+						name + "	&" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
 						"	//{\n	//}\n" +
 						"	return (*this);\n}\n\n" +
 						"/* ************************************************************************** */\n"+
@@ -54,7 +54,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"		" + name + "(" + name + " const & src);\n" +
 						"		~" + name + "();\n" +
 						"\n" +
-						"		" + name + " &operator=(" + name + " const &rhs);"+
+						"		" + name + "	&operator=(" + name + " const &rhs);"+
 						"\n\n" +
 						"	private:\n		\n" +
 						"};\n\n" +
