@@ -36,8 +36,8 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"/* ************************************************************************** */\n"+
 						"/* 									OPERATORS								  */\n" +
 						"/* ************************************************************************** */\n\n" +
-						name + "	&" + name + "::operator=(" + name + " const &rhs)\n{\n	//if ( this != &rhs )\n" +
-						"	//{\n	//}\n" +
+						name + "	&" + name + "::operator=(" + name + " const &rhs)\n{\n	if (this != &rhs)\n" +
+						"	{\n}\n" +
 						"	return (*this);\n}\n\n" +
 						"/* ************************************************************************** */\n"+
 						"/* 								MEMBER FUNCTIONS							  */\n" +
