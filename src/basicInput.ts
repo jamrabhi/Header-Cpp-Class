@@ -31,9 +31,9 @@ export async function createQuickClass(name: string | undefined) {
 
 		wsedit.createFile(filePathCpp, { ignoreIfExists: true });
 		wsedit.createFile(filePathHpp, { ignoreIfExists: true });
-
+		
 		vscode.workspace.applyEdit(wsedit);
-
+		
 		getTemplate( name, filePathCpp, filePathHpp );
 		await getHeadercpp( command, filePathCpp );
 		await getHeaderhpp( command, filePathHpp );
@@ -43,21 +43,25 @@ export async function createQuickClass(name: string | undefined) {
 export async function createTemplateFile(name: string | undefined){
 	if (name !== undefined){
 		name = name.charAt(0).toUpperCase() + name.slice(1);
-
+		
 		name = name.substr(0, name.length - 4);
-
+		
 		const wsedit = new vscode.WorkspaceEdit();
 		const wsPath = vscode.workspace.workspaceFolders![0].uri.fsPath;
-
+		
 		const filePathTpp = vscode.Uri.file(wsPath + '/' + name + ".tpp");
-
+		const filePathHpp = vscode.Uri.file(wsPath + '/' + name + '.hpp');
+		
 		let command = (vscode.workspace.getConfiguration().get('headercppclass.headerId') as string).trim();
-
+		
 		wsedit.createFile(filePathTpp, { ignoreIfExists: true });
+		wsedit.createFile(filePathHpp, { ignoreIfExists: true });
+		
 		vscode.workspace.applyEdit(wsedit);
 		
-		getTemplateTpp( name, filePathTpp );
+		getTemplateTpp( name, filePathTpp, filePathHpp );
 		await getHeadercpp( command, filePathTpp );
+		// await getHeaderhpp( command, filePathHpp );
 	}
 }
 /*

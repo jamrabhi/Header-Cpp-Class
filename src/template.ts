@@ -42,7 +42,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"/* ************************************************************************** */\n"+
 						"/* 								MEMBER FUNCTIONS							  */\n" +
 						"/* ************************************************************************** */\n\n"
-						+ "\n"
+						+ "\n";
 
 		let classhpp =	"#ifndef " + name.toUpperCase() + "_HPP\n" +
 						"# define " + name.toUpperCase() + "_HPP\n\n" +
@@ -58,7 +58,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 						"\n\n" +
 						"	private:\n		\n" +
 						"};\n\n" +
-						"#endif\n"
+						"#endif\n";
 
 
 		fs.writeFile(filePathCpp.fsPath, classcpp, function (err: any) { if (err) return console.log(err); });
@@ -68,7 +68,7 @@ export const getTemplate = ( name: string | undefined, filePathCpp: vscode.Uri ,
 	}
 }
 
-export const getTemplateTpp = ( name: string | undefined, filePathTpp: vscode.Uri ) => {
+export const getTemplateTpp = ( name: string | undefined, filePathTpp: vscode.Uri, filePathHpp: vscode.Uri ) => {
 	if (name)
 	{
 		let len = name.length;
@@ -80,34 +80,50 @@ export const getTemplateTpp = ( name: string | undefined, filePathTpp: vscode.Ur
 			star += "*"
 		}
 
-		let classtpp =	"#ifndef " + name.toUpperCase() + "_TPP\n" +
-						"# define " + name.toUpperCase() + "_TPP\n\n" +
+		let classtpp =	"/* ************************************************************************** */\n"+
+						"/* 							CONSTRUCTORS / DESTRUCTORS						  */\n"+
+						"/* ************************************************************************** */\n\n" +
+						"template<typename T>\n" +
+						name + "<T>::" + name + "()\n{\n}\n\n" +
+						"template<typename T>\n" +
+						name + "<T>::" + name + "(" + name + "<T> const &src)\n{\n	*this = src;\n}\n\n" +
+						"template<typename T>\n" +
+						name + "<T>::~" + name + "()\n{\n}\n\n" +
+						"/* ************************************************************************** */\n"+
+						"/* 									OPERATORS								  */\n" +
+						"/* ************************************************************************** */\n\n" +
+						"template<typename T>\n" +
+						name + "<T>	&" + name + "<T>::operator=(" + name + "<T> const &rhs)\n{\n	if (this != &rhs)\n" +
+						"	{\n	}\n" +
+						"	return (*this);\n}\n\n" +
+						"/* ************************************************************************** */\n"+
+						"/* 								MEMBER FUNCTIONS							  */\n" +
+						"/* ************************************************************************** */\n\n"
+						+ "\n";
+
+		let classhpp =	"#ifndef " + name.toUpperCase() + "_HPP\n" +
+						"# define " + name.toUpperCase() + "_HPP\n\n" +
 						"# include <iostream>\n" +
 						"# include <string>\n\n" +
-						"template < typename T >\n" +
+						"template<typename T>\n" +
 						"class " + name + "\n{\n" +
-						"\n" +
 						"	public:\n" +
+						"		" + name + "();\n" +
+						"		" + name + "(" + name + " const &src);\n" +
+						"		~" + name + "();\n" +
 						"\n" +
-						"\n	/*\n	** ------------------------------- CONSTRUCTOR --------------------------------\n	*/\n\n" +
-						"		" + name + "() {};\n" +
-						"		" + name + "( " + name + " const & src ) {};\n\n" +
-						"\n	/*\n	** -------------------------------- DESTRUCTOR --------------------------------\n	*/\n\n" +
-						"		~" + name + "() {};\n\n" +
-						"\n	/*\n	** --------------------------------- OVERLOAD ---------------------------------\n	*/\n\n" +
-						"		" + name + " &		operator=( " + name + " const & rhs )\n		{\n			//if ( this != &rhs )\n" +
-						"			//{\n				//this->_value = rhs.getValue();\n			//}\n" +
-						"			return *this;\n		}\n\n" +
-						"\n	/*\n	** --------------------------------- METHODS ----------------------------------\n	*/\n\n" +
-						"\n" +
-						"	private:\n\n" +
+						"		" + name + "	&operator=(" + name + " const &rhs);"+
+						"\n\n" +
+						"	private:\n		\n" +
 						"};\n\n" +
-						"#endif /* *" + star + " " + name.toUpperCase() + "_TPP */";
+						"# include \"" + name + ".tpp\"\n\n" +
+						"#endif\n";
 
 
 		fs.writeFile(filePathTpp.fsPath, classtpp, function (err: any) { if (err) return console.log(err); });
+		fs.writeFile(filePathHpp.fsPath, classhpp, function (err: any) { if (err) return console.log(err); });
 
-		vscode.window.showInformationMessage("Files : " + name + ".tpp created !");
+		vscode.window.showInformationMessage("Files : " + name + ".hpp, " + name + ".tpp created !");
 	}
 }
 
